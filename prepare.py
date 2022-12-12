@@ -4,7 +4,7 @@ from pydataset import data
 import numpy as np
 import env
 import os
-import prepare
+
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 
