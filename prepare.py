@@ -8,7 +8,13 @@ import os
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 
-
+def clean_titanic(df):
+    to_drop = ['class', 'embarked','deck','passenger_id', 'age']
+    df.drop(columns = to_drop, inplace = True)
+    df['embark_town'].fillna('Southampton',inplace = True)
+    dummies = pd.get_dummies(df[['sex','embark_town']],drop_first = [True, True])
+    df = pd.concat([df,dummies], axis = 1)
+    return df
 
 
 def train_val_test(df):
