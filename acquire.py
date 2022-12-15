@@ -7,8 +7,18 @@ import env
 
 def get_connection(db, username=env.username, host=env.host, password=env.password):
     return f'mysql+pymysql://{username}:{password}@{host}/{db}'
+    '''
+    this function acts as a part of the function below to establish a connection
+    with the sql server
+    '''
+
 
 def get_titanic_data():
+    '''
+    this function retrieves the titanic_db info from the sql server
+    or calls up the csv if it's saved in place
+    '''
+    
     filename = "titanic.csv"
 
     if os.path.isfile(filename):
@@ -24,8 +34,14 @@ def get_titanic_data():
         return df  
 
 def get_iris_data():
+    '''
+    this function retrieves the iris_db info from the sql server
+    or calls up the csv if it's saved in place
+    
+    '''
+    
     filename = "iris.csv"
-
+    
     if os.path.isfile(filename):
         return pd.read_csv(filename)
     else:
@@ -40,6 +56,13 @@ def get_iris_data():
 
 
 def get_telco_data():
+    
+    '''
+    this function retrieves the telco_db info from the sql server
+    or calls up the csv if it's saved in place
+    
+    '''
+    
     filename = "telco_churn.csv"
 
     if os.path.isfile(filename):

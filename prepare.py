@@ -9,6 +9,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 
 def clean_titanic(df):
+    '''
+    this function cleans up the titanic db
+    '''
+    
     to_drop = ['class', 'embarked','deck','passenger_id', 'age']
     df.drop(columns = to_drop, inplace = True)
     df['embark_town'].fillna('Southampton',inplace = True)
@@ -17,8 +21,15 @@ def clean_titanic(df):
     return df
 
 
-def train_val_test(df):
+def train_val_test(df, target):
+    '''
+    this function splits up the data into sections for training,
+    validating, and testing
+    models
+    '''
     seed = 42
-    train, val_test = train_test_split(df, train_size = 0.7, random_state = seed)
-    validate, test = train_test_split(val_test, train_size = 0.5, random_state = seed)
+    train, val_test = train_test_split(df, train_size = 0.7,
+                                       random_state = seed, stratify = df[target])
+    validate, test = train_test_split(val_test, train_size = 0.5, random_state = seed,
+                                      stratify = val_test[target])
     return train, validate, test
